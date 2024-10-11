@@ -71,42 +71,6 @@ const questions = [
         },
     },
     {
-        question: "스트레스를 받았을 때 어떻게 해소하나요?",
-        choices: {
-            A: { label: "친구나 가족과 대화하며 마음을 털어놓습니다.", type: "E" },
-            B: {
-                label: "혼자만의 시간을 가지며 내적으로 문제를 해결합니다.",
-                type: "I",
-            },
-        },
-    },
-    {
-        question: "여행을 갈 때 선호하는 스타일은 무엇인가요?",
-        choices: {
-            A: {
-                label: "그룹 여행을 선호하며 다양한 사람들과의 교류를 즐깁니다.",
-                type: "E",
-            },
-            B: {
-                label: "혼자 또는 친한 사람과의 소규모 여행을 선호합니다.",
-                type: "I",
-            },
-        },
-    },
-    {
-        question: "일상에서 에너지를 얻는 원천은 무엇인가요?",
-        choices: {
-            A: {
-                label: "외부 활동과 사람들과의 상호작용에서 에너지를 얻습니다.",
-                type: "E",
-            },
-            B: {
-                label: "내적 사고와 개인적인 활동에서 에너지를 충전합니다.",
-                type: "I",
-            },
-        },
-    },
-    {
         question: "새로운 프로젝트를 시작할 때 어떤 접근 방식을 선호하나요?",
         choices: {
             A: {
@@ -129,16 +93,6 @@ const questions = [
             B: {
                 label:
                     "상상력을 사용하거나 개념적인 아이디어를 탐구하는 활동을 선호합니다.",
-                type: "N",
-            },
-        },
-    },
-    {
-        question: "문제를 해결할 때 어떤 정보를 중요시하나요?",
-        choices: {
-            A: { label: "구체적인 사실과 데이터에 더 많이 의존합니다.", type: "S" },
-            B: {
-                label: "전체적인 맥락과 가능한 의미에 더 많이 의존합니다.",
                 type: "N",
             },
         },
@@ -178,19 +132,6 @@ const questions = [
         },
     },
     {
-        question: "여행을 갈 때 어떤 유형의 경험을 더 선호하나요?",
-        choices: {
-            A: {
-                label: "감각적인 경험과 실제로 체험할 수 있는 활동을 선호합니다.",
-                type: "S",
-            },
-            B: {
-                label: "새로운 아이디어와 문화를 탐험하는 것을 선호합니다.",
-                type: "N",
-            },
-        },
-    },
-    {
         question: "회의나 강의에서 정보를 어떻게 기억하나요?",
         choices: {
             A: {
@@ -198,13 +139,6 @@ const questions = [
                 type: "S",
             },
             B: { label: "주요 개념, 패턴, 그리고 의미를 잘 기억합니다.", type: "N" },
-        },
-    },
-    {
-        question: "새로운 아이디어나 프로젝트에 대해 어떻게 생각하나요?",
-        choices: {
-            A: { label: "실제로 적용 가능하고 현실적인 것을 선호합니다.", type: "S" },
-            B: { label: "혁신적이고 이론적인 것에 끌립니다.", type: "N" },
         },
     },
     {
@@ -316,13 +250,6 @@ const questions = [
         },
     },
     {
-        question: "마감기한을 관리하는 방식은?",
-        choices: {
-            A: { label: "마감기한 전에 일을 끝내려고 노력합니다.", type: "J" },
-            B: { label: "마감기한에 임박해서 작업하는 경향이 있습니다.", type: "P" },
-        },
-    },
-    {
         question: "일상 생활에서 얼마나 조직적인가요?",
         choices: {
             A: {
@@ -346,19 +273,6 @@ const questions = [
         },
     },
     {
-        question: "작업 환경에 대한 선호도는 어떤가요?",
-        choices: {
-            A: {
-                label: "깔끔하고 정돈된 환경에서 일하는 것을 선호합니다.",
-                type: "J",
-            },
-            B: {
-                label: "약간의 무질서가 있어도 창의성이 더 자극받는다고 느낍니다.",
-                type: "P",
-            },
-        },
-    },
-    {
         question: "팀 프로젝트에서의 역할은?",
         choices: {
             A: {
@@ -367,26 +281,6 @@ const questions = [
             },
             B: {
                 label: "유연하게 다양한 역할을 맡고 상황에 따라 조정합니다.",
-                type: "P",
-            },
-        },
-    },
-    {
-        question: "여행 계획을 세울 때 어떤 스타일인가요?",
-        choices: {
-            A: { label: "여행 일정, 숙소, 방문지를 미리 계획합니다.", type: "J" },
-            B: {
-                label: "대략적인 계획만 세우고 현지에서 결정하는 것을 선호합니다.",
-                type: "P",
-            },
-        },
-    },
-    {
-        question: "변경 사항이나 예기치 않은 일이 발생했을 때 반응은?",
-        choices: {
-            A: { label: "계획이 변경되면 스트레스를 받습니다.", type: "J" },
-            B: {
-                label: "새로운 상황에 쉽게 적응하고 유연하게 대처합니다.",
                 type: "P",
             },
         },
@@ -445,4 +339,4 @@ function displayRandomQuestion() {
     console.log(question);
 }
 
-displayRandomQuestion();
+export default questions;

@@ -1,13 +1,11 @@
-import "./App.css";
+import Home from "./page/Home";
 
 function App() {
 
 
   return (
     <div className="App">
-
-      <h1>MBTI별 영화 추천!</h1>
-      <button>테스트 하고 영화 추천 받기!</button>
+      <Home />
 
     </div>
   );
