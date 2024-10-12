@@ -310,33 +310,7 @@ const questions = [
     },
 ];
 
-const counts = {
-    E: 0,
-    I: 0,
-    S: 0,
-    N: 0,
-    T: 0,
-    F: 0,
-    J: 0,
-    P: 0,
-};
 
-function MakingQuestion() {
-    const randomIndex = Math.floor(Math.random() * questions.length);
-    return questions[randomIndex];
-}
 
-function answerQuestion(index, choice) {
-    const selectedChoice = questions[index].choices[choice];
-    counts[selectedChoice.type] += 1;
-    console.log(
-        `질문: ${questions[index].question}, 선택: ${selectedChoice.label}`
-    );
-}
-
-function displayRandomQuestion() {
-    const question = MakingQuestion().question;
-    console.log(question);
-}
 
 export default questions;
