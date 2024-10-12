@@ -3,9 +3,7 @@ import questions from '../../questions'
 import './Quiz.style.css'
 
 const Quiz = () => {
-
-    //이전, 다음 버튼을 눌렀을 때 전에 선택해놓은게 남아 있게 만들기
-    //이전에 선택했던 문제에 대해 답을 바꿨을때 count가 그거에 맞춰서 변경되게 하기
+    //이전으로 돌아가서 문제에 대한 답변이 바뀌면 count객체 수정 필요
 
 
     /* questions.forEach(question => (
@@ -100,6 +98,7 @@ const Quiz = () => {
 
 
     useEffect(() => {
+        console.log(counts);
     }, [counts])
 
 
