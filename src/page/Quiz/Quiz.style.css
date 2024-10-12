@@ -1,0 +1,16 @@
+.quiz-container {
+    padding: 10px;
+
+}
+
+.quiz-container .quiz-radio {
+    padding: 10px;
+    font-size: 20px;
+}
+
+.quiz-container .buttons {
+    width: 300px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}

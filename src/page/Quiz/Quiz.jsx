@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import questions from '../../questions'
-
+import './Quiz.style.css'
 
 const Quiz = () => {
+
+    //이전, 다음 버튼을 눌렀을 때 전에 선택해놓은게 남아 있게 만들기
+    //이전에 선택했던 문제에 대해 답을 바꿨을때 count가 그거에 맞춰서 변경되게 하기
+
 
     /* questions.forEach(question => (
         console.log(question.choices)
@@ -16,7 +20,8 @@ const Quiz = () => {
 
 
 
-    const [selectedChoice, setSelectedChoice] = useState("");
+    const [selectedChoice, setSelectedChoice] = useState({});
+
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [shuffledQuestions, setShuffledQuestions] = useState([]);
     const [counts, setCounts] = useState({
@@ -41,6 +46,13 @@ const Quiz = () => {
         /* console.log(selectedType) */
     }
 
+    const handle_Prev_Question = () => {
+        if (currentQuestionIndex > 0) {
+            setCurrentQuestionIndex(prevIndex =>
+                prevIndex - 1
+            );
+        }
+    }
 
 
     const handle_Next_Question = () => {
@@ -49,9 +61,6 @@ const Quiz = () => {
                 ...prevCounts,
                 [selectedChoice]: prevCounts[selectedChoice] + 1,
             }));
-
-            // 다음 질문으로 넘어갈 때 선택 초기화
-            setSelectedChoice("");
 
 
             if (currentQuestionIndex === shuffledQuestions.length - 1) {
@@ -116,7 +125,7 @@ const Quiz = () => {
                     <div className="quiz-container" >
                         <h2>{currentQuestion.question}</h2>
                         {Object.entries(currentQuestion.choices).map(([key, choice]) => (
-                            <div key={key}>
+                            <div className="quiz-radio" key={key}>
                                 <label>
                                     <input
                                         type="radio"
@@ -130,7 +139,12 @@ const Quiz = () => {
                             </div>
                         ))
                         }
-                        <button onClick={handle_Next_Question}>Next</button>
+                        <div className="buttons">
+                            <button onClick={handle_Prev_Question}>이전</button>
+                            <button onClick={handle_Next_Question}>다음</button>
+                        </div>
+
+
                     </div >
                 ) : (
                     <p>로딩중...</p> // 아직 질문이 준비되지 않았을 때 로딩 메시지 출력

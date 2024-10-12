@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Quiz from '../Quiz/Quiz'
+import './Home.style.css';
 const Home = () => {
     const [istestStart, SetIsTestStart] = useState(false);
 
