@@ -1,17 +1,15 @@
-import React from 'react'
-import api from '../../component/api'
-
+import React, { useState, useEffect } from 'react'
+import MovieSlider from '../../common/MovieSlider/MovieSlider';
 const Movies = () => {
-
-    const data = api();
-    console.log(data);
-
-
 
 
 
     return (
-        <div>Movies</div>
+        <div>
+            <h1>추천 영화</h1>
+            <MovieSlider />
+        </div>
+
     )
 }
 
