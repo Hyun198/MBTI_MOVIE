@@ -14,4 +14,5 @@ const fetchMovies = async () => {
     return data;
 }
 
-console.log(fetchMovies());
+
+export default fetchMovies();
