@@ -17,6 +17,8 @@ const Quiz = () => {
         E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0,
     }); // 각 타입의 count 저장
     const [isFinished, setIsFinished] = useState(false); // 퀴즈 완료 여부
+    const [mbti, setMbti] = useState('');
+
 
     const currentQuestion = questions[currentQuestionIndex]; // 현재 문제 가져오기
 
@@ -44,7 +46,13 @@ const Quiz = () => {
 
             // 마지막 문제인지 체크
             if (currentQuestionIndex === questions.length - 1) {
-                setIsFinished(true); // 퀴즈가 끝났으면 결과 창으로 이동
+                const mbti = `${counts.E >= counts.I ? 'E' : 'I'}
+                ${counts.S >= counts.N ? 'S' : 'N'}
+                ${counts.T >= counts.F ? 'T' : 'F'}
+                ${counts.J >= counts.P ? 'J' : 'P'}`;
+                setMbti(mbti)
+                setIsFinished(true)
+
             } else {
                 setCurrentQuestionIndex(prevIndex => prevIndex + 1); // 다음 문제로 이동
             }
@@ -52,6 +60,11 @@ const Quiz = () => {
             alert("답변을 하나 선택해주세요!"); // 답변을 선택하지 않았으면 경고
         }
     };
+    if (isFinished) {
+        return <Movies mbti={mbti} />; // MBTI 값을 Movies 컴포넌트에 전달
+    }
+
+
 
     // 이전 버튼 클릭 시 실행되는 함수
     const handle_Previous_Question = () => {
@@ -69,25 +82,25 @@ const Quiz = () => {
         setCurrentQuestionIndex(prevIndex => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
     };
 
-    // MBTI 결과 계산 후 보여주는 함수
+    /* // MBTI 결과 계산 후 보여주는 함수
     const show_mbti = () => {
         // counts 객체에서 가장 큰 값을 찾고, 그에 따른 MBTI 결과를 보여주는 로직
         const mbti = `${counts.E >= counts.I ? 'E' : 'I'}
         ${counts.S >= counts.N ? 'S' : 'N'}
         ${counts.T >= counts.F ? 'T' : 'F'}
         ${counts.J >= counts.P ? 'J' : 'P'}`;
+        setMbti(mbti)
+        setIsFinished(true)
         return (<div>
             당신의 MBTI는: {mbti} 입니다.
 
             <a href="/">홈으로</a>
 
         </div>)
-    };
+    }; */
 
-    // 퀴즈가 끝나면 결과 화면을 보여줍니다
-    if (isFinished) {
-        return show_mbti();
-    }
+
+
 
     return (
         <div>
