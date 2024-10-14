@@ -46,7 +46,8 @@ const Quiz = () => {
 
             // 마지막 문제인지 체크
             if (currentQuestionIndex === questions.length - 1) {
-                const mbti = `${counts.E >= counts.I ? 'E' : 'I'}
+                const mbti =
+                    `${counts.E >= counts.I ? 'E' : 'I'}
                 ${counts.S >= counts.N ? 'S' : 'N'}
                 ${counts.T >= counts.F ? 'T' : 'F'}
                 ${counts.J >= counts.P ? 'J' : 'P'}`;
@@ -77,29 +78,9 @@ const Quiz = () => {
                 [currentSelectedChoice]: prevCounts[currentSelectedChoice] - 1,
             }));
         }
-
         // 이전 문제로 이동
         setCurrentQuestionIndex(prevIndex => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
     };
-
-    /* // MBTI 결과 계산 후 보여주는 함수
-    const show_mbti = () => {
-        // counts 객체에서 가장 큰 값을 찾고, 그에 따른 MBTI 결과를 보여주는 로직
-        const mbti = `${counts.E >= counts.I ? 'E' : 'I'}
-        ${counts.S >= counts.N ? 'S' : 'N'}
-        ${counts.T >= counts.F ? 'T' : 'F'}
-        ${counts.J >= counts.P ? 'J' : 'P'}`;
-        setMbti(mbti)
-        setIsFinished(true)
-        return (<div>
-            당신의 MBTI는: {mbti} 입니다.
-
-            <a href="/">홈으로</a>
-
-        </div>)
-    }; */
-
-
 
 
     return (

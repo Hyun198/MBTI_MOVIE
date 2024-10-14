@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import MovieSlider from '../../common/MovieSlider/MovieSlider';
+import React, { useState, useEffect } from "react";
+import MovieSlider from "../../common/MovieSlider/MovieSlider";
 const Movies = ({ mbti }) => {
     const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
-    const [movies, setMovies] = useState([])
+    const [movies, setMovies] = useState([]);
 
     const mbtiGenres = {
         INFP: [14, 10749], // 판타지, 로맨스
@@ -21,51 +21,47 @@ const Movies = ({ mbti }) => {
         ISTP: [28, 53], // 액션, 스릴러
         ESTP: [28, 35], // 액션, 코미디
         ESTJ: [18], // 드라마
-    }
-
+    };
 
     const fetchMovies = async (genreIds) => {
-        const url = genreIds ? `https://api.themoviedb.org/3/discover/movie?with_genres=${genreIds.join(',')}&language=ko-KR&page=1` : 'https://api.themoviedb.org/3/movie/popular?&language=ko-KR&page=1'
+        const url = genreIds
+            ? `https://api.themoviedb.org/3/discover/movie?with_genres=${genreIds.join(",")}&language=ko-KR`
+            : "https://api.themoviedb.org/3/movie/popular?&language=ko-KR";
 
         const options = {
-            method: 'GET',
+            method: "GET",
             headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${API_KEY}`
-            }
+                accept: "application/json",
+                Authorization: `Bearer ${API_KEY}`,
+            },
         };
         try {
             const response = await fetch(url, options);
             const data = await response.json();
             /* console.log("movies: ", data.results); */
             setMovies(data.results);
-
         } catch (error) {
-            console.error('Error fetching movies:', error);
+            console.error("Error fetching movies:", error);
             return;
         }
-    }
+    };
 
     useEffect(() => {
-        if (mbti && mbtiGenres[mbti]) {
+        if (mbti) {
             const genreIds = mbtiGenres[mbti]; // MBTI에 해당하는 장르 ID 가져오기
-            console.log("genreIds: ", genreIds);
+            //console.log("genreIds: ", genreIds);
             fetchMovies(genreIds); // MBTI에 해당하는 영화 가져오기
         } else {
             fetchMovies(); // 기본 영화 가져오기
         }
     }, [mbti]);
 
-
-
-
     return (
         <div>
             <h1>추천 영화</h1>
             <MovieSlider movies={movies} />
         </div>
+    );
+};
 
-    )
-}
-
-export default Movies
+export default Movies;
