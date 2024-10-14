@@ -78,6 +78,7 @@ const Quiz = () => {
         ${counts.J >= counts.P ? 'J' : 'P'}`;
         return (<div>
             당신의 MBTI는: {mbti} 입니다.
+
             <a href="/">홈으로</a>
 
         </div>)

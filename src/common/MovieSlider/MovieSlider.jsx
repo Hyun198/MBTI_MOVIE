@@ -1,6 +1,8 @@
 import React from 'react'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import MovieCard from '../MovieCard/MovieCard';
+
 
 const responsive = {
     superLargeDesktop: {
@@ -23,6 +25,7 @@ const responsive = {
 };
 
 const MovieSlider = ({ movies }) => {
+
     return (
         <Carousel
             infinite={true}
@@ -31,7 +34,7 @@ const MovieSlider = ({ movies }) => {
             containerClass="carousel-container"
             responsive={responsive}
         >
-            {movies.map((movie, index) => (
+            {movies?.map((movie, index) => (
                 <MovieCard movie={movie} key={index} />
             ))}
         </Carousel>

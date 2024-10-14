@@ -1,16 +1,17 @@
-import React from 'react'
-
+import React, { useState, useEffect } from 'react'
+import './MovieCard.style.css'
 const MovieCard = ({ movie }) => {
     const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
-    const [movies, setMovies] = useState([])
     const [genres, setGenres] = useState([])
 
     const fetchGenres = async () => {
-        const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`
+        const url = 'https://api.themoviedb.org/3/genre/movie/list?&language=ko-KR';
         const options = {
+            method: 'GET',
             headers: {
                 accept: 'application/json',
+                Authorization: `Bearer ${API_KEY}`
             }
         };
         try {
@@ -24,41 +25,23 @@ const MovieCard = ({ movie }) => {
             return;
         }
     }
-    const fetchMovies = async () => {
-        const url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`; // API 키를 URL에 포함
-        const options = {
-            headers: {
-                accept: 'application/json'
-            }
-        };
-        try {
-            const response = await fetch(url, options);
-            const data = await response.json();
-            /* console.log("movies: ", data.results); */
-            setMovies(data.results);
-            return data;
 
-        } catch (error) {
-            console.error('Error fetching movies:', error);
-            return;
-        }
-    }
 
 
     useEffect(() => {
         fetchGenres();
-        fetchMovies();
     }, [])
 
     const show_genres = (genreIdList) => {
         /*   console.log("IdList", genreIdList);
           console.log("GenresName", genres); */
         if (genreIdList.length > 0 && genres.length > 0) {
-            return genres.filter(genre => genreIdList.includes(genre.id)).map(genre => genre.name).join(", ");
+            return genres?.filter(genre => genreIdList.includes(genre.id)).map(genre => genre.name).join(", ");
         }
     }
 
     return (
+
         <div
             style={{
                 backgroundImage:
@@ -69,11 +52,8 @@ const MovieCard = ({ movie }) => {
             className="movie-card"
         >
             <div className="overlay">
-                <h1 className="title">{movie.title}</h1>
                 <div className="genre">
-                    {show_genres(movie?.genre_ids).map((name) => (
-                        <div key={name} className="movie-badge">{name}</div>
-                    ))}
+                    {show_genres(movie?.genre_ids)}
                 </div>
             </div>
 
