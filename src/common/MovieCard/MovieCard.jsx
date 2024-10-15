@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import './MovieCard.style.css'
 const MovieCard = ({ movie }) => {
-    const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
-
     const [genres, setGenres] = useState([])
-
     const fetchGenres = async () => {
         const url = 'https://api.themoviedb.org/3/genre/movie/list?&language=ko-KR';
         const options = {
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: `Bearer ${API_KEY}`
+                Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NmRmOTBiMjk1NDQ4YWIyNDJmNzcyMTY2MzVjZjRjMSIsIm5iZiI6MTcyODkwODI1Mi40NTQ5MDksInN1YiI6IjY0OTEzYWEzYzJmZjNkMDBlMmUxZWY2YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0gKUX8OsjvWElvecJspSk6Mhe1vugV7RZeQHZYMJkUE`
             }
         };
         try {
@@ -25,13 +22,6 @@ const MovieCard = ({ movie }) => {
             return;
         }
     }
-
-
-
-    useEffect(() => {
-        fetchGenres();
-    }, [])
-
     const show_genres = (genreIdList) => {
         /*   console.log("IdList", genreIdList);
           console.log("GenresName", genres); */
@@ -39,6 +29,13 @@ const MovieCard = ({ movie }) => {
             return genres?.filter(genre => genreIdList.includes(genre.id)).map(genre => genre.name).join(", ");
         }
     }
+
+
+    useEffect(() => {
+        fetchGenres();
+    }, [])
+
+
 
     return (
 
@@ -51,11 +48,11 @@ const MovieCard = ({ movie }) => {
             }}
             className="movie-card"
         >
-            <div className="overlay">
+            {/* <div className="overlay">
                 <div className="genre">
                     {show_genres(movie?.genre_ids)}
                 </div>
-            </div>
+            </div> */}
 
         </div>
     )

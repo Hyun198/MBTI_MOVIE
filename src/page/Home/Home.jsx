@@ -15,7 +15,6 @@ const Home = () => {
             {!istestStart ? (
                 <div>
                     <button onClick={startTest}>테스트 하고 영화 추천 받기!</button>
-
                 </div>
 
             ) : (<Quiz />)}

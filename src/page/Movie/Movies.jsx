@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
-import MovieSlider from "../../common/MovieSlider/MovieSlider";
+import React, { useEffect, useState } from "react";
+import './Movies.style.css'
+import MovieCard from '../../common/MovieCard/MovieCard'
+
+
 const Movies = ({ mbti }) => {
-    const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+    const SearchMbti = mbti.replace(/\s+/g, '');
     const [movies, setMovies] = useState([]);
 
     const mbtiGenres = {
@@ -24,42 +27,34 @@ const Movies = ({ mbti }) => {
     };
 
     const fetchMovies = async (genreIds) => {
-        const url = genreIds
-            ? `https://api.themoviedb.org/3/discover/movie?with_genres=${genreIds.join(",")}&language=ko-KR`
-            : "https://api.themoviedb.org/3/movie/popular?&language=ko-KR";
-
+        const url = `https://api.themoviedb.org/3/discover/movie?&with_genres=${genreIds}&language=ko-KR&page=1`;
         const options = {
-            method: "GET",
+            method: 'GET',
             headers: {
-                accept: "application/json",
-                Authorization: `Bearer ${API_KEY}`,
-            },
+                accept: 'application/json',
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NmRmOTBiMjk1NDQ4YWIyNDJmNzcyMTY2MzVjZjRjMSIsIm5iZiI6MTcyODkwODI1Mi40NTQ5MDksInN1YiI6IjY0OTEzYWEzYzJmZjNkMDBlMmUxZWY2YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0gKUX8OsjvWElvecJspSk6Mhe1vugV7RZeQHZYMJkUE'
+            }
         };
-        try {
-            const response = await fetch(url, options);
-            const data = await response.json();
-            /* console.log("movies: ", data.results); */
-            setMovies(data.results);
-        } catch (error) {
-            console.error("Error fetching movies:", error);
-            return;
-        }
-    };
+        const response = await fetch(url, options);
+        const data = await response.json();
+        setMovies(data.results);
 
-    useEffect(() => {
-        if (mbti) {
-            const genreIds = mbtiGenres[mbti]; // MBTI에 해당하는 장르 ID 가져오기
-            //console.log("genreIds: ", genreIds);
-            fetchMovies(genreIds); // MBTI에 해당하는 영화 가져오기
-        } else {
-            fetchMovies(); // 기본 영화 가져오기
-        }
-    }, [mbti]);
+    }
+
+
+    if (SearchMbti) {
+        const genreIds = mbtiGenres[SearchMbti].join(',');
+        fetchMovies(genreIds);
+    }
+
 
     return (
-        <div>
-            <h1>추천 영화</h1>
-            <MovieSlider movies={movies} />
+        <div className="movie-container">
+
+            {movies?.map((movie, index) => (
+                <MovieCard movie={movie} key={index} />
+            ))}
+
         </div>
     );
 };

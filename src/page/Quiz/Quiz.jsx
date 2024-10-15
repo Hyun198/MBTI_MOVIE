@@ -3,24 +3,19 @@ import questions from '../../questions'
 import './Quiz.style.css'
 import Movies from '../Movie/Movies'
 
-const shuffleArray = (array) => {
-    return array
-        .map((item) => ({ item, sort: Math.random() }))
-        .sort((a, b) => a.sort - b.sort)
-        .map(({ item }) => item);
-};
 
 const Quiz = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 현재 문제의 인덱스
     const [selectedChoice, setSelectedChoice] = useState({}); // 각 문제에 대한 선택된 답 저장
     const [counts, setCounts] = useState({
         E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0,
-    }); // 각 타입의 count 저장
-    const [isFinished, setIsFinished] = useState(false); // 퀴즈 완료 여부
+    });
+
+    const [isFinished, setIsFinished] = useState(false);
+
     const [mbti, setMbti] = useState('');
 
-
-    const currentQuestion = questions[currentQuestionIndex]; // 현재 문제 가져오기
+    const currentQuestion = questions[currentQuestionIndex];
 
     // 답변을 선택할 때 실행되는 함수
     const handle_Choice_Change = (event) => {
@@ -38,7 +33,6 @@ const Quiz = () => {
         const currentSelectedChoice = selectedChoice[currentQuestionIndex]; // 현재 선택된 답
 
         if (currentSelectedChoice) {
-            // 선택된 타입의 카운트를 1 증가
             setCounts(prevCounts => ({
                 ...prevCounts,
                 [currentSelectedChoice]: prevCounts[currentSelectedChoice] + 1,
@@ -61,9 +55,6 @@ const Quiz = () => {
             alert("답변을 하나 선택해주세요!"); // 답변을 선택하지 않았으면 경고
         }
     };
-    if (isFinished) {
-        return <Movies mbti={mbti} />; // MBTI 값을 Movies 컴포넌트에 전달
-    }
 
 
 
@@ -82,9 +73,23 @@ const Quiz = () => {
         setCurrentQuestionIndex(prevIndex => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
     };
 
+    if (isFinished) {
+        return (
+            <>
+                <div className="quiz-result">
+                    <h2>당신의 MBTI는 {mbti} 입니다!</h2>
+
+                </div>
+                <Movies mbti={mbti} />
+            </>
+
+        );
+    }
+
+
 
     return (
-        <div>
+        <div className="quiz-container">
             <h2>{currentQuestion.question}</h2>
             <form>
                 {Object.entries(currentQuestion.choices).map(([key, choice]) => (
@@ -102,7 +107,7 @@ const Quiz = () => {
                     </div>
                 ))}
             </form>
-            <div>
+            <div className="handling_button">
                 <button onClick={handle_Previous_Question} disabled={currentQuestionIndex === 0}>이전</button>
                 <button onClick={handle_Next_Question}>다음</button>
             </div>
