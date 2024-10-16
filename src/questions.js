@@ -269,7 +269,7 @@ const questions = [
                 label: "여가 활동도 일정에 포함시키고 계획적으로 보냅니다.",
                 type: "J",
             },
-            B: { label: "기분이나 상황에 따라 spontane하게 결정합니다.", type: "P" },
+            B: { label: "기분이나 상황에 따라 즉흥적으로 결정합니다.", type: "P" },
         },
     },
     {

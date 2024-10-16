@@ -8,7 +8,7 @@ const MovieCard = ({ movie }) => {
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NmRmOTBiMjk1NDQ4YWIyNDJmNzcyMTY2MzVjZjRjMSIsIm5iZiI6MTcyODkwODI1Mi40NTQ5MDksInN1YiI6IjY0OTEzYWEzYzJmZjNkMDBlMmUxZWY2YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0gKUX8OsjvWElvecJspSk6Mhe1vugV7RZeQHZYMJkUE`
+                Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
             }
         };
         try {

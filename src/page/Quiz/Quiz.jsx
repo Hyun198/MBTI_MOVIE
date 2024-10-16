@@ -78,7 +78,7 @@ const Quiz = () => {
             <>
                 <div className="quiz-result">
                     <h2>당신의 MBTI는 {mbti} 입니다!</h2>
-
+                    <a href="/">테스트 다시 하기</a>
                 </div>
                 <Movies mbti={mbti} />
             </>
@@ -93,9 +93,10 @@ const Quiz = () => {
             <h2>{currentQuestion.question}</h2>
             <form>
                 {Object.entries(currentQuestion.choices).map(([key, choice]) => (
-                    <div key={key}>
+                    <div className="form-input" key={key}>
                         <label>
                             <input
+
                                 type="radio"
                                 name={`question-${currentQuestionIndex}`}
                                 value={key} // choice의 key 값

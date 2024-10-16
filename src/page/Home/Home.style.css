@@ -2,11 +2,26 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
     margin: auto;
+    padding: 10px;
 }
 
 .Test-Start button {
     padding: 10px;
+    border-radius: 10px;
+    border: none;
     cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: #b1bfdb;
+    transition: all 0.3s ease-in-out;
+}
+
+.Test-Start button:hover {
+    background-color: hsl(220, 37%, 50%);
+}
+
+.Test-Start img {
+    margin-top: 15px;
+    border-radius: 10px;
 }

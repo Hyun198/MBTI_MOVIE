@@ -14,3 +14,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     /* 카드에 그림자 추가 */
 }
+
+.movie-card:hover {
+    scale: 1.1;
+}
