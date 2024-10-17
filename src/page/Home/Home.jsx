@@ -16,12 +16,8 @@ const Home = () => {
                     <button onClick={startTest}>테스트 하고 영화 추천 받기!</button>
                     <img src="./mbti.jpg" alt="mbti" />
                 </div>
-
             ) : (<Quiz />)}
-
         </div>
-
-
     )
 }
 
