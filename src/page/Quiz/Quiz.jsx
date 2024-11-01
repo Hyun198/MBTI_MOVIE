@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import questions from "../../questions";
 import "./Quiz.style.css";
 import Movies from "../Movie/Movies";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 const shuffle_questions = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -36,11 +37,7 @@ const Quiz = () => {
         setShuffled_questions(shuffled);
     }, []);
 
-    /*     // 배열이 비어 있을 경우를 체크
-      if (shuffled_questions.length === 0) {
-          return <div>Loading questions...</div>; // 로딩 중 메시지
-      } */
-
+    const progressPercentage = Math.round(((currentQuestionIndex + 1) / questions.length) * 100);
     const currentQuestion = shuffled_questions[currentQuestionIndex];
 
     const handle_Choice_Change = (event) => {
@@ -103,34 +100,47 @@ const Quiz = () => {
                     <Movies mbti={mbti} />
                 </div>
             ) : (
-                <div className="quiz-container">
-                    {currentQuestion ? ( // currentQuestion이 존재할 때만 렌더링
-                        <>
-                            <h2>{currentQuestion.question}</h2>
-                            <form>
-                                {Object.entries(currentQuestion.choices).map(([key, choice]) => (
-                                    <div className={`form-input ${selectedChoice[currentQuestionIndex] === choice.type ? 'selected' : ''}`} key={key}>
-                                        <input
-                                            type="radio"
-                                            name={`question-${currentQuestionIndex}`}
-                                            value={key} // choice의 key 값
-                                            onChange={handle_Choice_Change} // 답변 선택 시 함수 호출
-                                            checked={selectedChoice[currentQuestionIndex] === choice.type} // 선택된 값 유지
-                                        />
-                                        {choice.label}
-                                    </div>
-                                ))}
-                            </form>
-                            <div className="handling_button">
-                                <button onClick={handle_Previous_Question} disabled={currentQuestionIndex === 0}>이전</button>
-                                <button onClick={handle_Next_Question}>다음</button>
-                            </div>
+                <>
+                    <div className="quiz-container">
+                        {currentQuestion ? ( // currentQuestion이 존재할 때만 렌더링
+                            <>
+                                <ProgressBar
+                                    completed={progressPercentage}
+                                    bgColor="#326ccd"
+                                    height="20px"
+                                    labelAlignment="center"
+                                    labelSize="12px"
+                                    transitionDuration="0.3s"
+                                />
+                                <h2>{currentQuestion.question}</h2>
+                                <form>
+                                    {Object.entries(currentQuestion.choices).map(([key, choice]) => (
+                                        <div className={`form-input ${selectedChoice[currentQuestionIndex] === choice.type ? 'selected' : ''}`} key={key}>
+                                            <input
+                                                type="radio"
+                                                name={`question-${currentQuestionIndex}`}
+                                                value={key} // choice의 key 값
+                                                onChange={handle_Choice_Change} // 답변 선택 시 함수 호출
+                                                checked={selectedChoice[currentQuestionIndex] === choice.type} // 선택된 값 유지
+                                            />
+                                            {choice.label}
+                                        </div>
+                                    ))}
+                                </form>
+                                <div className="handling_button">
+                                    <button onClick={handle_Previous_Question} disabled={currentQuestionIndex === 0}>이전</button>
+                                    <button onClick={handle_Next_Question}>다음</button>
+                                </div>
 
-                        </>
-                    ) : (
-                        <h2>문제가 없습니다.</h2> // 문제가 없을 때 대체 텍스트
-                    )}
-                </div>
+                            </>
+                        ) : (
+                            <h2>문제가 없습니다.</h2> // 문제가 없을 때 대체 텍스트
+                        )}
+                    </div>
+                    <div className="go-back">
+                        <a href="/">테스트 다시 하기</a>
+                    </div>
+                </>
             )}
         </div>
     );

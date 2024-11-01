@@ -10,6 +10,7 @@ const Home = () => {
 
     return (
         <div>
+            <h1 style={{ textAlign: 'center' }}>무슨 영화를 봐야할지 모르겠을 때! </h1>
             <h1 style={{ textAlign: 'center' }}>MBTI별 영화 추천!</h1>
             {!istestStart ? (
                 <div className="Test-Start">
